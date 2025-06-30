@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://41cindkkmrvt"]
+
+[ext_resource type="Texture2D" uid="uid://dgq41oa0fpib0" path="res://art/dark-fantasy-pixel-art-v0-tfrugafbw19c1.png" id="1_826fv"]
+[ext_resource type="Script" uid="uid://xenewo3xbvet" path="res://scripts/win.gd" id="1_iiocm"]
+[ext_resource type="FontFile" uid="uid://b5nn81mswi1cg" path="res://art/fonts/PixeloidSans-Bold.ttf" id="2_iiocm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_826fv"]
+bg_color = Color(0.427911, 0.617845, 0.429642, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iiocm"]
+bg_color = Color(0.494708, 0.013326, 0.161485, 1)
+
+[node name="win" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iiocm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_826fv")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -42.0
+offset_right = 99.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_iiocm")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_826fv")
+text = "Ganaste"
+horizontal_alignment = 1
+
+[node name="PointsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = 19.0
+offset_right = 132.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_iiocm")
+theme_override_font_sizes/font_size = 24
+text = "Prueba"
+horizontal_alignment = 1
+
+[node name="quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -99.5
+offset_top = -39.0
+offset_right = 99.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_iiocm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_iiocm")
+text = "Salir"
+
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

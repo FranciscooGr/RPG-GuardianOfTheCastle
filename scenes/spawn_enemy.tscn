@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dom3yete7o1v8"]
+
+[ext_resource type="Script" uid="uid://cxashdja4pbsb" path="res://scripts/spawn_enemy.gd" id="1_fchoh"]
+
+[node name="spawn_enemy" type="Area2D"]
+script = ExtResource("1_fchoh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="cooldown" type="Timer" parent="."]
+wait_time = 20.0
+
+[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

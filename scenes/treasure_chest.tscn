@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://6brdxn4spony"]
+
+[ext_resource type="Script" uid="uid://bsxp8gw88p507" path="res://scripts/treasure_chest.gd" id="1_ybsko"]
+[ext_resource type="PackedScene" uid="uid://rmsvbthj02k" path="res://scenes/interactable.tscn" id="2_4lyqs"]
+[ext_resource type="Texture2D" uid="uid://cgncv3dqw66y2" path="res://art/objects/chestsAll.png" id="2_b1w43"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b1w43"]
+radius = 15.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tymi3"]
+atlas = ExtResource("2_b1w43")
+region = Rect2(0, 0, 24, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb1f1"]
+atlas = ExtResource("2_b1w43")
+region = Rect2(24, 0, 24, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4lyqs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tymi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb1f1")
+}],
+"loop": true,
+"name": &"chest",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ybsko"]
+radius = 17.0294
+
+[sub_resource type="GDScript" id="GDScript_b1w43"]
+script/source = "extends CollisionShape2D
+"
+
+[node name="treasure_chest" type="StaticBody2D"]
+script = ExtResource("1_ybsko")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b1w43")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, 0)
+sprite_frames = SubResource("SpriteFrames_4lyqs")
+animation = &"chest"
+
+[node name="interactable" parent="." instance=ExtResource("2_4lyqs")]
+interact_name = "I to open chest"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactable"]
+shape = SubResource("CircleShape2D_ybsko")
+script = SubResource("GDScript_b1w43")

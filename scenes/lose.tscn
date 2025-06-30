@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://t7of0v0n6d3y"]
+
+[ext_resource type="Script" uid="uid://cofsgmbrji3qm" path="res://scripts/lose.gd" id="1_10rtl"]
+[ext_resource type="Texture2D" uid="uid://dgq41oa0fpib0" path="res://art/dark-fantasy-pixel-art-v0-tfrugafbw19c1.png" id="2_h0cgr"]
+[ext_resource type="FontFile" uid="uid://b5nn81mswi1cg" path="res://art/fonts/PixeloidSans-Bold.ttf" id="3_h0cgr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pl8j0"]
+bg_color = Color(0.173637, 0.715047, 0.293564, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_46blr"]
+bg_color = Color(1, 0, 0.305882, 1)
+
+[node name="Lose" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 4.0
+offset_right = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_10rtl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_h0cgr")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.5
+offset_top = -42.0
+offset_right = 132.5
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="reintentar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("3_h0cgr")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pl8j0")
+text = "Reintentar"
+
+[node name="salir" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_h0cgr")
+theme_override_styles/normal = SubResource("StyleBoxFlat_46blr")
+text = "Salir"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 103.0
+offset_right = -130.0
+offset_bottom = 127.0
+grow_horizontal = 2
+scale = Vector2(4, 4)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_h0cgr")
+text = "Perdiste"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/reintentar" to="." method="_on_reintentar_pressed"]
+[connection signal="pressed" from="VBoxContainer/salir" to="." method="_on_salir_pressed"]

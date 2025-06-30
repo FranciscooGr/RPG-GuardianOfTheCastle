@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://88yseuxe0cm8"]
+
+[ext_resource type="Texture2D" uid="uid://cgncv3dqw66y2" path="res://art/objects/chestsAll.png" id="1_8mv8v"]
+[ext_resource type="Script" uid="uid://6287332sqsj7" path="res://scripts/reward_chest.gd" id="1_s3b6r"]
+[ext_resource type="PackedScene" uid="uid://rmsvbthj02k" path="res://scenes/interactable.tscn" id="3_o86fb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3b6r"]
+atlas = ExtResource("1_8mv8v")
+region = Rect2(0, 48, 24, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o86fb"]
+atlas = ExtResource("1_8mv8v")
+region = Rect2(24, 48, 24, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cqlhn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3b6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o86fb")
+}],
+"loop": false,
+"name": &"chest",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mv8v"]
+size = Vector2(20, 19)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cqlhn"]
+
+[node name="reward_chest" type="StaticBody2D"]
+script = ExtResource("1_s3b6r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cqlhn")
+animation = &"chest"
+frame = 1
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -0.5)
+shape = SubResource("RectangleShape2D_8mv8v")
+
+[node name="interactable" parent="." instance=ExtResource("3_o86fb")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactable"]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_cqlhn")

@@ -1,13 +1,15 @@
 extends CharacterBody2D
 
-const speed = 100
+var speed = 100
 var current_direction = "none"
 var enemy_inattack_range = false
 var enemy_atack_cooldown = true
 var healt = 100
 var player_alive = true
 var attack_in_progress = false
-
+var count:int = 0
+var maxHealt: int = 100
+@onready var health_label = $healthbar/healthbar_label
 
 
 func _ready():
@@ -23,7 +25,8 @@ func _physics_process(delta):
 		player_alive = false
 		healt = 0
 		print("player kill")
-		self.queue_free()
+		get_tree().change_scene_to_file("res://scenes/lose.tscn")
+		
 func player_movement(delta):
 	
 	if Input.is_action_pressed("ui_right"):
@@ -105,10 +108,10 @@ func _on_player_hitbox_body_exited(body):
 		
 func enemy_attack():
 	if enemy_inattack_range and enemy_atack_cooldown == true:
-		healt = healt - 10
+		healt -= 15
 		enemy_atack_cooldown = false
 		$attack_cooldown.start()
-		print(healt)
+		print("Atacando! Salud ahora:", healt)
 	
 
 func _on_attack_cooldown_timeout():
@@ -144,19 +147,20 @@ func _on_deal_attack_timer_timeout() -> void:
 	
 func update_health():
 	var healthbar = $healthbar
-	healthbar.value = healt
-	if healt >= 100:
-		healthbar.visible= false
-	else: 
-		healthbar.visible= true
-		
-		
+	var health_label = $healthbar/healthbar_label  
 
+	if healt > maxHealt:
+		maxHealt = healt
+		healthbar.max_value = maxHealt
+	else:
+		# maxHealt no baja, se mantiene
+		healthbar.max_value = maxHealt
 
-func _on_regin_timer_timeout():
-	if healt < 100:
-		healt = healt + 20
-		if healt > 100:
-			healt = 100
-	if healt <= 0:
-		healt = 0 
+	healthbar.value = min(healt, maxHealt)
+
+	# Actualizamos texto con vida real / máximo base
+	health_label.text = "%d / %d" % [healt, maxHealt]
+
+	healthbar.visible = true
+	health_label.visible = true
+		

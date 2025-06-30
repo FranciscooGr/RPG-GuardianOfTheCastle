@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://0hyr21ow864i"]
+
+[ext_resource type="Script" uid="uid://tha5jodfqbf7" path="res://scripts/interacting_component.gd" id="1_syslh"]
+[ext_resource type="FontFile" uid="uid://b5nn81mswi1cg" path="res://art/fonts/PixeloidSans-Bold.ttf" id="2_syslh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_syslh"]
+radius = 14.0357
+
+[node name="interacting_component" type="Node2D"]
+script = ExtResource("1_syslh")
+
+[node name="interact_range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interact_range"]
+shape = SubResource("CircleShape2D_syslh")
+
+[node name="interact_label" type="Label" parent="."]
+z_index = 10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -61.0
+offset_right = 45.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_syslh")
+text = "I to interact"
+
+[connection signal="area_entered" from="interact_range" to="." method="_on_interact_range_area_entered"]
+[connection signal="area_exited" from="interact_range" to="." method="_on_interact_range_area_exited"]
